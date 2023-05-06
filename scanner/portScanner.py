@@ -7,24 +7,22 @@ def scan(target, ports):
 
 def scan_port(ipaddress, port):
     try:
-      #initiate socket object
       sock = socket.socket()
-      #connect to target
       ret = socket.connect((ipaddress, port))
       print("[+]Port Opened " + str(port))
       sock.close()
     except:
       pass
 
+if __name__ == "__main__":
+  targets = input("[*] Enter targets to scan: ") #e.g. 192.168.1.1, 192.168.1.5
+  ports = int(input("[*] Enter number of ports to scan: "))
 
-targets = input("[*] Enter targets to scan: ") #e.g. 192.168.1.1, 192.168.1.5
-ports = int(input("[*] Enter number of ports to scan: "))
-
-#check if multiple targets specified
-if "," in targets:
-  print("[*] Scanning multiple targets")
-  for ip_addr in targets.split(","):
-    scan(ip_addr.strip(" "), ports)
-else:
-  scan(targets, ports)
+  #check if multiple targets specified
+  if "," in targets:
+    print("[*] Scanning multiple targets")
+    for ip_addr in targets.split(","):
+      scan(ip_addr.strip(" "), ports)
+  else:
+    scan(targets, ports)
     
